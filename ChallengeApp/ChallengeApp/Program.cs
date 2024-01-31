@@ -27,20 +27,20 @@ List<Employee> employees = new List<Employee>()
     employee1, employee2, employee3
 };
 
-int maxResult = 0;
+int MaxResult = -1;
 Employee employeeWithMaxResult = null;
 
 foreach (var employee in employees)
 {
-    if (employee.maxResult > maxResult)
+    if (employee.MaxResult > MaxResult)
     {
         employeeWithMaxResult = employee;
-        maxResult = employee.maxResult;
+        MaxResult = employee.MaxResult;
     }
 }
 
 Console.WriteLine("Pracownik z najwyższą liczbą punktów to: " + employeeWithMaxResult.Name + " " +
-    employeeWithMaxResult.Surname + " " + employeeWithMaxResult.Age + " " + " lat " + "z wynikiem " + " " + maxResult);
+    employeeWithMaxResult.Surname + " " + employeeWithMaxResult.Age + " " + " lat " + "z wynikiem " + " " + MaxResult);
 
 
 

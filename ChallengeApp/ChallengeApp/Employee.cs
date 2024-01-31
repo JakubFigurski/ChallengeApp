@@ -16,7 +16,7 @@
 
 
 
-        public int maxResult
+        public int MaxResult
         {
             get
             {
