@@ -65,26 +65,7 @@ namespace ChallengeApp
 
 
 
-        public Statistics GetStatistics()
-        {
-            var statistics = new Statistics();
-
-            statistics.Avarange = 0;
-            statistics.Max = float.MinValue;
-            statistics.Min = float.MaxValue;
-
-            foreach (var grade in this.grades)
-            {
-                statistics.Max = Math.Max(statistics.Max, grade);
-                statistics.Min = Math.Min(statistics.Min, grade);
-                statistics.Avarange = statistics.Avarange + grade;
-
-            }
-
-            statistics.Avarange = statistics.Avarange / this.grades.Count;
-
-            return statistics;
-        }
+       
 
 
         public Statistics GetStatisticsWithForEach()
