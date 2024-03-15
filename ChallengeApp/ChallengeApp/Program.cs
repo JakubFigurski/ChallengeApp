@@ -39,7 +39,6 @@ var employee = new Employee();
                 Console.WriteLine($"Exception catched: {e.Message}");
         }
     }
-  
 }
 var statistics = employee.GetStatistics();
 Console.WriteLine($"Averange {statistics.Avarange}");

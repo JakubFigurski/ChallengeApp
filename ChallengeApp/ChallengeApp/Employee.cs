@@ -88,7 +88,6 @@
         }
         public Statistics GetStatistics()
         {
-
             var statistics = new Statistics();
             statistics.Avarange = 0;
             statistics.Max = float.MinValue;

@@ -13,5 +13,6 @@
         public int Count { get; set; }
 
         public float Sum { get; set; }
+
     }
 }

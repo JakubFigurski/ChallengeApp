@@ -1,7 +1,8 @@
 ﻿namespace ChallengeApp.Tests
 {
     public class Tests
-    {
+    { 
+
         [Test]
         public void ShouldReturnAllZeroesWhenGradesCountIsZero()
         {
