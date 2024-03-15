@@ -7,5 +7,11 @@
         public float Max { get; set; }
 
         public float Avarange { get; set; }
+
+        public char AvarangeLetter { get; set; }
+
+        public int Count { get; set; }
+
+        public float Sum { get; set; }
     }
 }

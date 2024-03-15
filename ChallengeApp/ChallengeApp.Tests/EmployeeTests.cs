@@ -1,55 +1,59 @@
-﻿
-namespace ChallengeApp.Tests
+﻿namespace ChallengeApp.Tests
 {
-    public class EmployeeTests
+    public class Tests
     {
-
         [Test]
-        public void ShouldReturnMin()
+        public void ShouldReturnAllZeroesWhenGradesCountIsZero()
         {
-            var employee1 = new Employee("Kuba", "Figurski", 27);
-            employee1.AddGrade(2);
-            employee1.AddGrade(5);
-            employee1.AddGrade(7);
-            employee1.AddGrade(10);
-            employee1.AddGrade(4);
+            //arrange
+            var Employee = new Employee();
 
-            var statistics1 = employee1.GetStatistics();
+            // act
+            Statistics stat = Employee.GetStatistics();
 
-            Assert.AreEqual(2, statistics1.Min);
+            // assert
+            Assert.That(stat.Max, Is.EqualTo(0));
+            Assert.That(stat.Min, Is.EqualTo(0));
+            Assert.That(stat.Avarange, Is.EqualTo(0));
+        }
+        [Test]
+        public void ShouldReturnCorrectMinMax()
+        {
+            //arrange
+            var Employee = new Employee();
+            Employee.AddGrade(1);
+            Employee.AddGrade(2);
+            Employee.AddGrade(3);
+
+            // act
+            Statistics stat = Employee.GetStatistics();
+
+            // assert
+            Assert.That(stat.Min, Is.EqualTo(1));
+            Assert.That(stat.Max, Is.EqualTo(3));
         }
 
         [Test]
-        public void ShouldReturnMax()
+        public void ShouldReturnCorrectAverageLetter()
         {
-            var employee1 = new Employee("Kuba", "Figurski", 27);
-            employee1.AddGrade(2);
-            employee1.AddGrade(5);
-            employee1.AddGrade(7);
-            employee1.AddGrade(10);
-            employee1.AddGrade(4);
+            //arrange
+            var Employee = new Employee();
+            Employee.AddGrade('A');
+            Employee.AddGrade('a');
+            Employee.AddGrade('B');
+            Employee.AddGrade('b');
+            Employee.AddGrade('C');
+            Employee.AddGrade('c');
+            Employee.AddGrade('D');
+            Employee.AddGrade('d');
+            Employee.AddGrade('E');
+            Employee.AddGrade('e');
 
-            var statistics1 = employee1.GetStatistics();
+            // act
+            Statistics stat = Employee.GetStatistics();
 
-            Assert.AreEqual(10, statistics1.Max);
+            // assert
+            Assert.That(stat.AvarangeLetter, Is.EqualTo('E'));
         }
-
-        [Test]
-        public void ShouldReturnAverange()
-        {
-            var employee1 = new Employee("Kuba", "Figurski", 27);
-            employee1.AddGrade(2);
-            employee1.AddGrade(5);
-            employee1.AddGrade(7);
-            employee1.AddGrade(10);
-            employee1.AddGrade(4);
-
-            var statistics1 = employee1.GetStatistics();
-
-            Assert.AreEqual(5.6f, statistics1.Avarange);
-        }
-
-
-
     }
 }
