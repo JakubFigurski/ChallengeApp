@@ -25,7 +25,7 @@
                 throw new Exception("Invalid grade value");
             }
         }
-
+         
         public void AddGrade(string? grade)
         {
             if (float.TryParse(grade, out float result))
