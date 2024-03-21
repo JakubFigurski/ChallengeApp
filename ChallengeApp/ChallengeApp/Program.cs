@@ -6,7 +6,8 @@ Console.WriteLine("Q/q wyjście z programu");
 Console.WriteLine("=======================================");
 Console.WriteLine("");
 
-var employee = new Employee();
+var employee = new Employee("kuba", "Figurski");
+
  
     while (true)
     {
@@ -46,8 +47,3 @@ Console.WriteLine($"Max {statistics.Max}");
 Console.WriteLine($"Min {statistics.Min}");
 Console.WriteLine($"Number of added grades: {statistics.Count}");
 Console.WriteLine($"Sum of all grades: {statistics.Sum}");
-
-
-/// Działająca aplikacja do oceny pracownika
-/// Działające testy jednostkowe wraz ze sprawdzeniem liter a b c ..
-/// na gita
