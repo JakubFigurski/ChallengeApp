@@ -6,7 +6,7 @@ Console.WriteLine("Q/q wyjście z programu");
 Console.WriteLine("=======================================");
 Console.WriteLine("");
 
-var employee = new Employee("kuba", "Figurski");
+var supervisior = new Supervisior("kuba", "Figurski");
 
  
     while (true)
@@ -22,7 +22,7 @@ var employee = new Employee("kuba", "Figurski");
         {
             try
             {
-                employee.AddGrade(input.ToCharArray(0, 1)[0]);
+                supervisior.AddGrade(input.ToCharArray(0, 1)[0]);
             }
             catch (Exception e)
             {
@@ -33,7 +33,7 @@ var employee = new Employee("kuba", "Figurski");
         {
             try
             {
-                employee.AddGrade(input);
+                supervisior.AddGrade(input);
             }
             catch (Exception e)
             {
@@ -41,7 +41,7 @@ var employee = new Employee("kuba", "Figurski");
         }
     }
 }
-var statistics = employee.GetStatistics();
+var statistics = supervisior.GetStatistics();
 Console.WriteLine($"Averange {statistics.Avarange}");
 Console.WriteLine($"Max {statistics.Max}");
 Console.WriteLine($"Min {statistics.Min}");
