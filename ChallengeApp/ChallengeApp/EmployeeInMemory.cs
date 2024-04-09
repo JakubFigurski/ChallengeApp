@@ -1,4 +1,6 @@
-﻿namespace ChallengeApp
+﻿using System.Diagnostics;
+
+namespace ChallengeApp
 {
     internal class EmployeeInMemory : EmployeeBase
     {
@@ -85,12 +87,15 @@
         public override Statistics GetStatistics()
         {
             var statistics = new Statistics();
-            statistics.Avarange = 0;
+            
 
             if (this.grades.Count > 0)
             {
+                statistics.Avarange = 0;
                 statistics.Max = float.MinValue;
                 statistics.Min = float.MaxValue;
+                statistics.Count = 0;
+                statistics.Sum = 0;
                 foreach (var grade in this.grades)
                 {
                     if (grade < 0)
@@ -100,8 +105,11 @@
                     statistics.Max = Math.Max(statistics.Max, grade);
                     statistics.Min = Math.Min(statistics.Min, grade);
                     statistics.Avarange += grade;
+                    statistics.Count++;
+                    statistics.Sum = statistics.Sum + grade;
                 }
                 statistics.Avarange = statistics.Avarange / this.grades.Count;
+               
             }
             else
             {

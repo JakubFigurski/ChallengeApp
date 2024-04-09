@@ -1,7 +1,9 @@
 ﻿namespace ChallengeApp
 {
     public class EmployeeInFile : EmployeeBase
+        
     {
+        private List<float> grades = new List<float>();
         public const string fileName = "grades.txt";
 
         public EmployeeInFile(string name, string surname)
@@ -19,7 +21,7 @@
             {
                 using (var writer = File.AppendText(fileName))
                 {
-                    writer.WriteLine(grade);
+                    writer.WriteLine(grade);     
                 }
             }
             else
@@ -67,21 +69,23 @@
                             throw new Exception("Unsupported grade");
                     }
                 }
+
+
                 stringscore += signDetect;
 
                 using (var writer = File.AppendText(fileName))
                 {
                     if (stringscore < 0)
                     {
-                        writer.WriteLine(0);
+                        this.AddGrade(0);
                     }
                     else if (stringscore > 100)
                     {
-                        writer.WriteLine(100);
+                        this.AddGrade(100);
                     }
                     else
                     {
-                        writer.WriteLine(stringscore);
+                        this.AddGrade(stringscore);
                     }
                 }
             }

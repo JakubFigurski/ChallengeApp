@@ -51,6 +51,8 @@ var statistics = employee.GetStatistics();
 Console.WriteLine($"Avg: {statistics.Avarange}");
 Console.WriteLine($"Min: {statistics.Min}");
 Console.WriteLine($"Max: {statistics.Max}");
+Console.WriteLine($"Number of added grades: {statistics.Count}");
+Console.WriteLine($"Sum of all grades: {statistics.Sum}");
 
 
 

@@ -1,4 +1,6 @@
-﻿namespace ChallengeApp
+﻿using System.Diagnostics;
+
+namespace ChallengeApp
 {
     public class Employee : Person, IEmployee
     {
@@ -104,6 +106,7 @@
             {
                 statistics.Max = float.MinValue;
                 statistics.Min = float.MaxValue;
+             
                 foreach (var grade in this.grades)
                 {
                     if (grade < 0)
