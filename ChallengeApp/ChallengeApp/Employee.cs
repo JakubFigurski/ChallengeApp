@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 
 namespace ChallengeApp
 {
@@ -7,9 +8,9 @@ namespace ChallengeApp
         private List<float> grades = new List<float>();
 
         public Employee()
-            : this("no name", "no surname") 
-            
-        {          
+            : this("no name", "no surname")
+
+        {
         }
 
         public Employee(string name, string surname)
@@ -28,7 +29,7 @@ namespace ChallengeApp
                 throw new Exception("Invalid grade value");
             }
         }
-         
+
         public void AddGrade(string? grade)
         {
             if (float.TryParse(grade, out float result))
@@ -39,37 +40,37 @@ namespace ChallengeApp
             {
                 this.AddGrade(resultLetter);
             }
-            else 
+            else
             {
                 throw new Exception("String is not float");
             }
-        
+
         }
         public void AddGrade(char grade)
         {
             switch (grade)
             {
                 case 'A':
-                    case 'a':
-                        this.AddGrade(100);
+                case 'a':
+                    this.AddGrade(100);
                     break;
                 case 'B':
-                    case 'b':
-                        this.AddGrade(80);
+                case 'b':
+                    this.AddGrade(80);
                     break;
                 case 'C':
-                    case 'c':
-                        this.AddGrade(60);
+                case 'c':
+                    this.AddGrade(60);
                     break;
                 case 'D':
-                    case 'd':
-                        this.AddGrade(40);
+                case 'd':
+                    this.AddGrade(40);
                     break;
                 case 'E':
-                    case 'e':
-                        this.AddGrade(20);
+                case 'e':
+                    this.AddGrade(20);
                     break;
-                default:                  
+                default:
                     throw new Exception("Wrong Letter");
 
             }
@@ -99,23 +100,23 @@ namespace ChallengeApp
             var statistics = new Statistics();
             statistics.Avarange = 0;
             statistics.Max = float.MinValue;
-            statistics.Min = float.MaxValue; 
+            statistics.Min = float.MaxValue;
             statistics.Count = 0;
             statistics.Sum = 0;
             if (this.grades.Count > 0)
             {
                 statistics.Max = float.MinValue;
                 statistics.Min = float.MaxValue;
-             
+
                 foreach (var grade in this.grades)
                 {
                     if (grade < 0)
-                    {                      
+                    {
                         continue;
                     }
                     statistics.Max = Math.Max(statistics.Max, grade);
                     statistics.Min = Math.Min(statistics.Min, grade);
-                    statistics.Avarange= grade;
+                    statistics.Avarange = grade;
                     statistics.Count++;
                     statistics.Sum = statistics.Sum + grade;
                 }

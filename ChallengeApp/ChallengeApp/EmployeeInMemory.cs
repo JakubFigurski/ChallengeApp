@@ -1,31 +1,33 @@
-﻿using System.Diagnostics;
-
-namespace ChallengeApp
+﻿namespace ChallengeApp
 {
     internal class EmployeeInMemory : EmployeeBase
     {
+        public override event GradeAddedDelegate? GradeAdded;
         private List<float> grades = new List<float>();
+
+
         public EmployeeInMemory(string name, string surname)
             : base(name, surname)
         {
         }
-        public EmployeeInMemory()
-            : base()
-        {
-        }
+
+
         public override void AddGrade(float grade)
         {
             if (grade >= 0 && grade <= 100)
             {
                 this.grades.Add(grade);
+                if (GradeAdded != null)
+                {
+                    GradeAdded(this, new EventArgs());
+                }
             }
             else
             {
                 throw new Exception("Invalid grade value");
             }
         }
-
-        public override void AddGrade(string grade)
+        public override void AddGrade(string? grade)
         {
             if ((!string.IsNullOrWhiteSpace(grade)) && (grade.Length < 3))
             {
@@ -83,19 +85,14 @@ namespace ChallengeApp
                 throw new Exception("Wrong grade string");
             }
         }
-
         public override Statistics GetStatistics()
         {
             var statistics = new Statistics();
-            
-
+            statistics.Avarange = 0;
             if (this.grades.Count > 0)
             {
-                statistics.Avarange = 0;
                 statistics.Max = float.MinValue;
                 statistics.Min = float.MaxValue;
-                statistics.Count = 0;
-                statistics.Sum = 0;
                 foreach (var grade in this.grades)
                 {
                     if (grade < 0)
@@ -105,18 +102,14 @@ namespace ChallengeApp
                     statistics.Max = Math.Max(statistics.Max, grade);
                     statistics.Min = Math.Min(statistics.Min, grade);
                     statistics.Avarange += grade;
-                    statistics.Count++;
-                    statistics.Sum = statistics.Sum + grade;
                 }
                 statistics.Avarange = statistics.Avarange / this.grades.Count;
-               
             }
             else
             {
                 statistics.Min = 0;
                 statistics.Max = 0;
             }
-
             switch (statistics.Avarange)
             {
                 case var a when a >= 80:
@@ -135,9 +128,7 @@ namespace ChallengeApp
                     statistics.AvarangeLetter = 'E';
                     break;
             }
-
             return statistics;
         }
-
     }
 }

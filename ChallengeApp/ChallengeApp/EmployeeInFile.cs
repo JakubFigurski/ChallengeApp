@@ -1,19 +1,20 @@
-﻿namespace ChallengeApp
+﻿using System.Reflection.PortableExecutable;
+namespace ChallengeApp
 {
     public class EmployeeInFile : EmployeeBase
-        
     {
-        private List<float> grades = new List<float>();
+        public override event GradeAddedDelegate? GradeAdded;
         public const string fileName = "grades.txt";
 
-        public EmployeeInFile(string name, string surname)
+         public EmployeeInFile(string name, string surname)
             : base(name, surname)
-        {
-        }
-        public EmployeeInFile()
-            : base()
-        {
-        }
+         {
+         }
+         public EmployeeInFile()
+             :base()
+         {
+         }
+
 
         public override void AddGrade(float grade)
         {
@@ -21,7 +22,11 @@
             {
                 using (var writer = File.AppendText(fileName))
                 {
-                    writer.WriteLine(grade);     
+                    writer.WriteLine(grade);
+                }
+                if (GradeAdded != null)
+                {
+                    GradeAdded(this, new EventArgs());
                 }
             }
             else
@@ -29,8 +34,7 @@
                 throw new Exception("Invalid grade value");
             }
         }
-
-        public override void AddGrade(string grade)
+        public override void AddGrade(string? grade)
         {
             if ((!string.IsNullOrWhiteSpace(grade)) && (grade.Length < 3))
             {
@@ -69,32 +73,25 @@
                             throw new Exception("Unsupported grade");
                     }
                 }
-
-
                 stringscore += signDetect;
-
-                using (var writer = File.AppendText(fileName))
+                if (stringscore < 0)
                 {
-                    if (stringscore < 0)
-                    {
-                        this.AddGrade(0);
-                    }
-                    else if (stringscore > 100)
-                    {
-                        this.AddGrade(100);
-                    }
-                    else
-                    {
-                        this.AddGrade(stringscore);
-                    }
+                    this.AddGrade(0);
+                }
+                else if (stringscore > 100)
+                {
+                    this.AddGrade(100);
+                }
+                else
+                {
+                    this.AddGrade(stringscore);
                 }
             }
             else
             {
-                throw new Exception("Wrong grade " +                    "string");
+                throw new Exception("Wrong grade string");
             }
         }
-
         public override Statistics GetStatistics()
         {
             var statistics = new Statistics();
@@ -102,17 +99,13 @@
             statistics.Max = float.MinValue;
             statistics.Min = float.MaxValue;
             var gradesCounter = 0;
-
             if (File.Exists(fileName))
             {
                 using (var reader = File.OpenText(fileName))
                 {
-
-                    string line = null;
-
+                    string? line = null;
                     while ((line = reader.ReadLine()) != null)
                     {
-
                         var grade = float.Parse(line);
                         if (grade >= 0)
                         {
@@ -138,7 +131,6 @@
                 statistics.Min = 0;
                 statistics.Max = 0;
             }
-
             switch (statistics.Avarange)
             {
                 case var a when a >= 80:
@@ -157,7 +149,6 @@
                     statistics.AvarangeLetter = 'E';
                     break;
             }
-
             return statistics;
         }
     }

@@ -3,13 +3,13 @@
     public abstract class Person
     {
         public Person(string? name, string? surname)
-        {   
+        {
             this.Name = name;
             this.Surname = surname;
-        }          
-      public Person()
+        }
+        public Person()
         {
-            
+
         }
 
         public string? Name { get; private set; }
