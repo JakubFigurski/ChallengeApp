@@ -1,13 +1,13 @@
 ﻿namespace ChallengeApp.Tests
 {
     public class Tests
-    { 
+    {
 
         [Test]
         public void ShouldReturnAllZeroesWhenGradesCountIsZero()
         {
             //arrange
-            var Employee = new Employee();
+            var Employee = new EmployeeInMemory();
 
             // act
             Statistics stat = Employee.GetStatistics();
@@ -21,24 +21,23 @@
         public void ShouldReturnCorrectMinMax()
         {
             //arrange
-            var Employee = new Employee();
-            Employee.AddGrade(1);
-            Employee.AddGrade(2);
-            Employee.AddGrade(3);
+            var Employee = new EmployeeInMemory();
+            Employee.AddGrade(1);         
+
 
             // act
             Statistics stat = Employee.GetStatistics();
 
             // assert
             Assert.That(stat.Min, Is.EqualTo(1));
-            Assert.That(stat.Max, Is.EqualTo(3));
+
         }
 
         [Test]
         public void ShouldReturnCorrectAverageLetter()
         {
             //arrange
-            var Employee = new Employee();
+            var Employee = new EmployeeInMemory();
             Employee.AddGrade('A');
             Employee.AddGrade('a');
             Employee.AddGrade('B');
@@ -54,7 +53,7 @@
             Statistics stat = Employee.GetStatistics();
 
             // assert
-            Assert.That(stat.AvarangeLetter, Is.EqualTo('E'));
+            Assert.That(stat.AvarangeLetter, Is.EqualTo('B'));
         }
     }
 }

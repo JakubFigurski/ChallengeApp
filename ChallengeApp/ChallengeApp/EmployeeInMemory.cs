@@ -1,6 +1,6 @@
 ﻿namespace ChallengeApp
 {
-    internal class EmployeeInMemory : EmployeeBase
+    public class EmployeeInMemory : EmployeeBase
     {
         public override event GradeAddedDelegate? GradeAdded;
         private List<float> grades = new List<float>();
@@ -11,6 +11,9 @@
         {
         }
 
+        public EmployeeInMemory()
+        {
+        }
 
         public override void AddGrade(float grade)
         {
@@ -85,50 +88,51 @@
                 throw new Exception("Wrong grade string");
             }
         }
-        public override Statistics GetStatistics()
-        {
-            var statistics = new Statistics();
-            statistics.Avarange = 0;
-            if (this.grades.Count > 0)
-            {
-                statistics.Max = float.MinValue;
-                statistics.Min = float.MaxValue;
-                foreach (var grade in this.grades)
-                {
-                    if (grade < 0)
-                    {
-                        continue;
-                    }
-                    statistics.Max = Math.Max(statistics.Max, grade);
-                    statistics.Min = Math.Min(statistics.Min, grade);
-                    statistics.Avarange += grade;
-                }
-                statistics.Avarange = statistics.Avarange / this.grades.Count;
-            }
-            else
-            {
-                statistics.Min = 0;
-                statistics.Max = 0;
-            }
-            switch (statistics.Avarange)
-            {
-                case var a when a >= 80:
-                    statistics.AvarangeLetter = 'A';
-                    break;
-                case var a when a >= 60:
-                    statistics.AvarangeLetter = 'B';
-                    break;
-                case var a when a >= 40:
-                    statistics.AvarangeLetter = 'C';
-                    break;
-                case var a when a >= 20:
-                    statistics.AvarangeLetter = 'D';
-                    break;
-                default:
-                    statistics.AvarangeLetter = 'E';
-                    break;
-            }
-            return statistics;
-        }
+
+         public override  Statistics GetStatistics()
+         {
+             var statistics = new Statistics();
+             statistics.Avarange = 0;
+             if (this.grades.Count > 0)
+             {
+                 statistics.Max = float.MinValue;
+                 statistics.Min = float.MaxValue;
+                 foreach (var grade in this.grades)
+                 {
+                     if (grade < 0)
+                     {
+                         continue;
+                     }
+                     statistics.Max = Math.Max(statistics.Max, grade);
+                     statistics.Min = Math.Min(statistics.Min, grade);
+                     statistics.Avarange += grade;
+                 }
+                 statistics.Avarange = statistics.Avarange / this.grades.Count;
+             }
+             else
+             {
+                 statistics.Min = 0;
+                 statistics.Max = 0;
+             }
+             switch (statistics.Avarange)
+             {
+                 case var a when a >= 80:
+                     statistics.AvarangeLetter = 'A';
+                     break;
+                 case var a when a >= 60:
+                     statistics.AvarangeLetter = 'B';
+                     break;
+                 case var a when a >= 40:
+                     statistics.AvarangeLetter = 'C';
+                     break;
+                 case var a when a >= 20:
+                     statistics.AvarangeLetter = 'D';
+                     break;
+                 default:
+                     statistics.AvarangeLetter = 'E';
+                     break;
+             }
+             return statistics;
+         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace ChallengeApp
 {
-    public abstract class EmployeeBase : IEmployee
+    public abstract class EmployeeBase
     {
         public delegate void GradeAddedDelegate(object sender, EventArgs args);
         public abstract event GradeAddedDelegate GradeAdded;
