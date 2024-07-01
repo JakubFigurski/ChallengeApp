@@ -6,8 +6,8 @@ Console.WriteLine("Q/q wyjście z programu");
 Console.WriteLine("=======================================");
 Console.WriteLine("");
 
-var employee1 = new EmployeeInMemory("Kuba", "Figurski");
-var employee2 = new EmployeeInFile("Kuba", "Figurski");
+var employee = new EmployeeInMemory("Kuba", "Figurski");
+
 
 if (File.Exists(EmployeeInFile.fileName))
 {
@@ -15,7 +15,7 @@ if (File.Exists(EmployeeInFile.fileName))
 }
 while (true)
 {
-    Console.WriteLine("Enter the employee's next grade. Range: 1-6(-/+) or A/a=100 B/b=80 C/c=60 D/d=40 E/e=20   (Q/q - quit): ");
+    Console.WriteLine("Witamy w Programie do oceny pracowników. A/a - 100   B/b - 80   C/c - 60  D/d = 40  E/e - 20  F/f - 0   (Q/q - quit): ");
     string? input = Console.ReadLine();
     if ((input == "q") ^ (input == "Q"))
     {
@@ -25,8 +25,7 @@ while (true)
     {
         try
         {
-            employee1.AddGrade(input.ToCharArray(0, 1)[0]);
-            employee2.AddGrade(input.ToCharArray(0, 1)[0]);
+            employee.AddGrade(input.ToCharArray(0, 1)[0]);
         }
         catch (Exception e)
         {
@@ -37,8 +36,8 @@ while (true)
     {
         try
         {
-            employee1.AddGrade(input);
-            employee2.AddGrade(input);
+            employee.AddGrade(input);
+            
         }
         catch (Exception e)
         {
@@ -46,7 +45,7 @@ while (true)
         }
     }
 }
-var statistics = employee1.GetStatistics();
+var statistics = employee.GetStatistics();
 Console.WriteLine("Statistics from memory:");
 Console.WriteLine($"Avg: {statistics.Avarange}");
 Console.WriteLine($"Min: {statistics.Min}");
@@ -54,13 +53,7 @@ Console.WriteLine($"Max: {statistics.Max}");
 Console.WriteLine($"Number of added grades: {statistics.Count}");
 Console.WriteLine($"Sum of all grades: {statistics.Sum}");
 
-statistics = employee2.GetStatistics();
-Console.WriteLine("Statistics from file:");
-Console.WriteLine($"Avg: {statistics.Avarange}");
-Console.WriteLine($"Min: {statistics.Min}");
-Console.WriteLine($"Max: {statistics.Max}");
-Console.WriteLine($"Number of added grades: {statistics.Count}");
-Console.WriteLine($"Sum of all grades: {statistics.Sum}");
+
 
 
 

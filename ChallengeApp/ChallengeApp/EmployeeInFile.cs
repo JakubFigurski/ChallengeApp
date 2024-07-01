@@ -18,8 +18,7 @@ namespace ChallengeApp
 
         public override void AddGrade(float grade)
         {
-            if (grade >= 0 && grade <= 100)
-            {
+            if (grade >= 0 && grade <= 100)            {
                 using (var writer = File.AppendText(fileName))
                 {
                     writer.WriteLine(grade);
@@ -63,7 +62,7 @@ namespace ChallengeApp
                             stringscore = 40;
                             break;
                         case '2':
-                            stringscore = 20;
+                            stringscore = 20; 
                             break;
                         case '1':
                         case '0':
@@ -95,61 +94,9 @@ namespace ChallengeApp
         public override Statistics GetStatistics()
         {
             var statistics = new Statistics();
-            statistics.Avarange = 0;
-            statistics.Max = float.MinValue;
-            statistics.Min = float.MaxValue;
-            var gradesCounter = 0;
-            if (File.Exists(fileName))
-            {
-                using (var reader = File.OpenText(fileName))
-                {
-                    string? line = null;
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        var grade = float.Parse(line);
-                        if (grade >= 0)
-                        {
-                            statistics.Max = Math.Max(statistics.Max, grade);
-                            statistics.Min = Math.Min(statistics.Min, grade);
-                            statistics.Avarange += grade;
-                            gradesCounter++;
-                        }
-                    }
-                    if (gradesCounter > 0)
-                    {
-                        statistics.Avarange = statistics.Avarange / gradesCounter;
-                    }
-                    else
-                    {
-                        statistics.Min = 0;
-                        statistics.Max = 0;
-                    }
-                }
-            }
-            else
-            {
-                statistics.Min = 0;
-                statistics.Max = 0;
-            }
-            switch (statistics.Avarange)
-            {
-                case var a when a >= 80:
-                    statistics.AvarangeLetter = 'A';
-                    break;
-                case var a when a >= 60:
-                    statistics.AvarangeLetter = 'B';
-                    break;
-                case var a when a >= 40:
-                    statistics.AvarangeLetter = 'C';
-                    break;
-                case var a when a >= 20:
-                    statistics.AvarangeLetter = 'D';
-                    break;
-                default:
-                    statistics.AvarangeLetter = 'E';
-                    break;
-            }
+
             return statistics;
         }
     }
+    
 }
