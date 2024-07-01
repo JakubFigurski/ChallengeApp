@@ -6,7 +6,7 @@ Console.WriteLine("Q/q wyjście z programu");
 Console.WriteLine("=======================================");
 Console.WriteLine("");
 
-var employee = new EmployeeInMemory("Kuba", "Figurski");
+var employee = new EmployeeInFile("Kuba", "Figurski");
 
 
 if (File.Exists(EmployeeInFile.fileName))

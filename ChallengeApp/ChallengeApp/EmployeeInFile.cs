@@ -6,19 +6,20 @@ namespace ChallengeApp
         public override event GradeAddedDelegate? GradeAdded;
         public const string fileName = "grades.txt";
 
-         public EmployeeInFile(string name, string surname)
-            : base(name, surname)
-         {
-         }
-         public EmployeeInFile()
-             :base()
-         {
-         }
+        public EmployeeInFile(string name, string surname)
+           : base(name, surname)
+        {
+        }
+        public EmployeeInFile()
+            : base()
+        {
+        }
 
 
         public override void AddGrade(float grade)
         {
-            if (grade >= 0 && grade <= 100)            {
+            if (grade >= 0 && grade <= 100)
+            {
                 using (var writer = File.AppendText(fileName))
                 {
                     writer.WriteLine(grade);
@@ -62,7 +63,7 @@ namespace ChallengeApp
                             stringscore = 40;
                             break;
                         case '2':
-                            stringscore = 20; 
+                            stringscore = 20;
                             break;
                         case '1':
                         case '0':
@@ -95,8 +96,26 @@ namespace ChallengeApp
         {
             var statistics = new Statistics();
 
+            if (File.Exists(fileName))
+            {
+                int count = 0;
+
+                using (var reader = File.OpenText(fileName))
+
+                {
+                    var line = reader.ReadLine();
+
+                    while (line != null)
+                    {
+                        var number = float.Parse(line);
+                        statistics.AddGrade(number);
+                        count++;
+                        line = reader.ReadLine();
+                    }
+                }
+            }
             return statistics;
         }
+
     }
-    
 }
